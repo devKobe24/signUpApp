@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Signup Page</title>
+    <link rel="stylesheet" href="/v1/static/css/sign-up.css">
+</head>
+<body>
+<div class="signup-container">
+    <form id="signupForm" class="signup-form">
+        <h2>Create Admin Account</h2>
+        <div class="input-group">
+            <label for="adminName">Admin Name</label>
+            <input type="text" id="adminName" name="adminName" required>
+        </div>
+        <div class="input-group">
+            <label for="adminNumber">Admin Number</label>
+            <input type="text" id="adminNumber" name="adminNumber" required>
+        </div>
+        <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="input-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+        </div>
+        <button type="submit">Sign Up</button>
+        <p class="login-link">Already have an account? <a href="/v1/main.html">Login here</a></p>
+    </form>
+</div>
+<script src="/v1/static/js/sign-up.js"></script>
+</body>
+</html>
