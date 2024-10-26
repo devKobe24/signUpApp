@@ -21,7 +21,7 @@ document.getElementById('adminSignupForm').addEventListener('submit', function (
     };
 
     // Fetch API를 사용하여 서버로 POST 요청을 보냄
-    fetch('/api/regist/admin', {
+    fetch('/api/register/admin', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
