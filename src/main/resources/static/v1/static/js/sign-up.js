@@ -2,29 +2,29 @@
 document.getElementById('signupForm').addEventListener('submit', function (event) {
     event.preventDefault();
 
-    const userName = document.getElementById('userName').value;
-    const userEmail = document.getElementById('userEmail').value;
-    const userPassword = document.getElementById('userPassword').value;
+    const userName = document.getElementById('username').value;
+    const userEmail = document.getElementById('email').value;
+    const userPassword = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
 
     if (userPassword != confirmPassword) {
-        alert('Passwords do not match!')
+        alert("Passwords do not match!")
         return;
     }
 
-    const registData = {
+    const registerData = {
         userName: userName,
         userEmail: userEmail,
         userPassword: userPassword
     };
 
     // Fetch API를 사용하여 서버로 POST 요청을 보냄
-    fetch('/api/regist', {
+    fetch('/api/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(registData)
+        body: JSON.stringify(registerData)
     })
         .then(response => {
             if (response.ok) {
