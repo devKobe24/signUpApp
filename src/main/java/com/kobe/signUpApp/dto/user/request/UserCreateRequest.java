@@ -5,6 +5,7 @@ public class UserCreateRequest {
     private String userEmail;
     private String userPassword;
     private String confirmUserPassword;
+    private Boolean isSamePassword;
 
     public String getUserName() {
         return userName;
@@ -20,5 +21,14 @@ public class UserCreateRequest {
 
     public String getConfirmUserPassword() {
         return confirmUserPassword;
+    }
+
+    // 패스워드 확인 로직
+    public Boolean getSamePassword() {
+        if (this.userPassword.equals(this.confirmUserPassword)) {
+            return this.isSamePassword = true;
+        } else {
+            return this.isSamePassword = false;
+        }
     }
 }
