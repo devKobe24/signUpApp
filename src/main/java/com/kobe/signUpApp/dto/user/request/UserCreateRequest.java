@@ -1,24 +1,24 @@
 package com.kobe.signUpApp.dto.user.request;
 
 public class UserCreateRequest {
-    private String username;
-    private String email;
-    private String password;
-    private String confirmPassword;
+    private String userName;
+    private String userEmail;
+    private String userPassword;
+    private String confirmUserPassword;
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUserPassword() {
+        return userPassword;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
+    public String getConfirmUserPassword() {
+        return confirmUserPassword;
     }
 }
