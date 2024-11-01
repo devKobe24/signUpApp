@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const token = localStorage.getItem('jwtToken');
     if (!token) {
         alert('로그인이 필요합니다.');
-        window.location.href = "/v1/static/html/login.html";
+        window.location.href = "/v1/main.html";
         return;
     }
 
@@ -33,4 +33,9 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('로그인 정보가 유효하지 않습니다.');
             window.location.href = "/v1/main.html"
         });
+
+    document.getElementById('userpageForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // 기본 폼 제출 동작 방지
+        window.location.href = "/v1/main.html";
+    });
 });
