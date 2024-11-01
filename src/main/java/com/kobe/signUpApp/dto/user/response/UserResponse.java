@@ -1,9 +1,11 @@
 package com.kobe.signUpApp.dto.user.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.kobe.signUpApp.domain.user.User;
 import lombok.Data;
 
 @Data
+@JsonIgnoreProperties({"password"})
 public class UserResponse {
     private long id;
     private String name;
