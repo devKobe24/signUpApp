@@ -1,17 +1,12 @@
-// login-scripts.js
 document.getElementById('loginForm').addEventListener('submit', function (event) {
     event.preventDefault();
 
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-    const loginData = {
-        email: email,
-        password: password
-    };
+    const loginData = {email, password};
 
-    // Fetch API를 사용하여 서버로 POST 요청을 보냄
-    fetch('/api/login', {
+    fetch('http://localhost:8081/api/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -20,17 +15,23 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
     })
         .then(response => {
             if (response.ok) {
-                return response.json(); // 서버에서 JSON 데이터를 변환할 경우 처리
+                console.log("Response Status:", response.status);
+                console.log("Response OK:", response.ok);
+
+                alert("로그인에 성공하였습니다!");
+                return response.json();
+            } else {
+                alert("로그인에 실패하였습니다!");
+                throw new Error("Sign In Failed!");
             }
-            throw new Error('Login Failed');
         })
         .then(data => {
-            console.log('Login Success:', data);
-            alert('Login Successful!');
-            // 필요한 경우 리디렉션 또는 추가 작업 수행
+            console.log("Response Data:", data);
+            localStorage.setItem('jwtToken', data.token);
+            window.location.href = "/v1/static/html/user-info.html";
         })
         .catch(error => {
-            console.error('Error:', error);
+            console.error('Error during login:', error);
             alert('Login Failed. Please check your credentials.');
         });
 });
