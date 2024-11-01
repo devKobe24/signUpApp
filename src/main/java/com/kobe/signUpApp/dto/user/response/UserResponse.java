@@ -1,39 +1,55 @@
 package com.kobe.signUpApp.dto.user.response;
 
 import com.kobe.signUpApp.domain.user.User;
+import lombok.Data;
 
+@Data
 public class UserResponse {
     private long id;
-    private String userName;
-    private String userEmail;
-    private String userPassword;
-    private String confirmUserPassword;
+    private String name;
+    private String email;
+    private String password;
+    private String confirmPassword;
+
+    public UserResponse(
+            long id,
+            String name,
+            String email,
+            String password,
+            String confirmPassword
+    ) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+    }
 
     public UserResponse(long id, User user) {
         this.id = id;
-        this.userName = user.getUserName();
-        this.userEmail = user.getUserEmail();
-        this.userPassword = user.getUserPassword();
-        this.confirmUserPassword = user.getConfirmUserPassword();
+        this.name = user.getUserName();
+        this.email = user.getUserEmail();
+        this.password = user.getUserPassword();
+        this.confirmPassword = user.getConfirmUserPassword();
     }
 
     public long getId() {
         return id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public String getConfirmUserPassword() {
-        return confirmUserPassword;
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
 }
