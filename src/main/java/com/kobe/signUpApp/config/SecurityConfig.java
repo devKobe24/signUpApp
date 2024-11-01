@@ -23,7 +23,7 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable()) // CSRF 비활성화 (API 사용 시 필요할 수 있음)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/v1/static/**", "/api/register", "/api/login", "/v1/main.html").permitAll() // 인증 없이 접근 가능 경로
+                        .requestMatchers("/v1/static/favicon.ico", "/v1/static/**", "/api/register", "/api/login", "/v1/main.html").permitAll() // 인증 없이 접근 가능 경로
                         .anyRequest().authenticated() // 그 외의 모든 요청은 인증 필요
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class) // JWT 필터 추가
