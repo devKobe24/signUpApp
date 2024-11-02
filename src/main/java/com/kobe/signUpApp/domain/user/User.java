@@ -26,6 +26,27 @@ public class User {
     protected User() {}
 
     public User(
+            Long id,
+            String userName,
+            String userEmail,
+            String userPassword
+            ) {
+        if (userName == null || userName.isBlank()) {
+            throw new IllegalArgumentException(String.format("잘못된 userName(%s)이 들어왔습니다.", userName));
+        } else if (userEmail == null || userEmail.isBlank()) {
+            throw new IllegalArgumentException(String.format("잘못된 userEmail(%s)이 들어왔습니다.", userEmail));
+        } else if (userPassword == null || userPassword.isBlank()) {
+            throw new IllegalArgumentException(String.format("잘못된 userPassword(%s)이 들어왔습니다.", userPassword));
+        }
+
+        this.id = id;
+        this.userName = userName;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+    }
+
+    public User(
+            Long id,
             String userName,
             String userEmail,
             String userPassword,
@@ -42,7 +63,7 @@ public class User {
             throw new IllegalArgumentException(String.format("잘못된 confirmUserPassword(%s)이 들어왔습니다.", confirmUserPassword));
         }
 
-
+        this.id = id;
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
