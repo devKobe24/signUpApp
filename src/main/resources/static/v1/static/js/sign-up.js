@@ -3,10 +3,10 @@ document.addEventListener('DOMContentLoaded', function (){
     document.getElementById('signupForm').addEventListener('submit', function (event) {
         event.preventDefault();
 
-        const userName = document.getElementById('username').value;
-        const userEmail = document.getElementById('email').value;
-        const userPassword = document.getElementById('password').value;
-        const confirmUserPassword = document.getElementById('confirm-userPassword').value;
+        const userName = document.getElementById('userName').value;
+        const userEmail = document.getElementById('userEmail').value;
+        const userPassword = document.getElementById('userPassword').value;
+        const confirmUserPassword = document.getElementById('confirmUserPassword').value;
 
         if (userPassword != confirmUserPassword) {
             alert("Passwords do not match!")
@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', function (){
             userPassword: userPassword,
             confirmUserPassword: confirmUserPassword
         };
+
+        // registerData 객체를 출력하여 userPassword와 confirmUserPassword 필드가 제대로 들어가는지 확인하니 위한 로그
+        console.log("Register Data:", registerData);
 
         // Fetch API를 사용하여 서버로 POST 요청을 보냄
         fetch('http://localhost:8081/api/register', {
