@@ -1,6 +1,7 @@
 package com.kobe.signUpApp.controller.user;
 
 import com.kobe.signUpApp.dto.user.request.UserCreateRequest;
+import com.kobe.signUpApp.dto.user.request.UserLoginRequest;
 import com.kobe.signUpApp.dto.user.response.UserResponse;
 import com.kobe.signUpApp.service.user.UserService;
 import com.kobe.signUpApp.util.JwtUtil;
@@ -27,10 +28,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> loginUser(@RequestBody UserCreateRequest request) {
-        UserResponse user = userService.authenticateUser(request.getEmail(), request.getPassword());
+    public ResponseEntity<Map<String, String>> loginUser(@RequestBody UserLoginRequest request) {
+        System.out.println("Received login request for email: " + request.getUserEmail());
+        UserResponse user = userService.authenticateUser(request.getUserEmail(), request.getUserPassword());
         if (user != null) {
-            String token = JwtUtil.generateToken(request.getEmail()); // jwtUtil 인스턴스로 메서드 호출
+            String token = JwtUtil.generateToken(request.getUserEmail()); // jwtUtil 인스턴스로 메서드 호출
             Map<String, String> response = new HashMap<>();
             response.put("token", token);
             response.put("message", "Login successful");
@@ -55,14 +57,18 @@ public class UserController {
 
     @PostMapping("/sign-in")
     public ResponseEntity<Map<String, String>> signIn(@RequestBody UserCreateRequest request) {
-        UserResponse user = userService.authenticateUser(request.getEmail(), request.getPassword());
+        UserResponse user = userService.authenticateUser(request.getUserEmail(), request.getUserPassword());
         if (user != null) {
+            // 토큰 생성
+            String token = JwtUtil.generateToken(user.getEmail());
+
             Map<String, String> response = new HashMap<>();
             response.put("email", user.getEmail());
-            response.put("password", user.getPassword());
-            return ResponseEntity.ok(response);
+            response.put("token", token);
+
+            return ResponseEntity.ok(response); // JSON 형태로 email과 token 반환
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Invalid credentials"));
         }
     }
 }
