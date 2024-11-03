@@ -16,14 +16,14 @@ document.addEventListener('DOMContentLoaded', function () {
     })
         .then(response => {
             if (response.ok) {
-                console.log(response); // 응답 객체를 확인하기 위해 추가
+                // console.log(response); // 응답 객체를 확인하기 위해 추가 // 디버그 용 콘솔 로그
                 return response.json(); // JSON 현태로 변환
             } else {
                 throw new Error('Failed to fetch user data');
             }
         })
         .then(data => {
-            console.log("Fetched user data: ", data); // 데이터 확인
+            // console.log("Fetched user data: ", data); // 데이터 확인 // 디버그 용 콘솔 로그
             // 데이터가 성공적으로 로드되면 HTML에 삽입
             document.getElementById('name').textContent = data.name;
             document.getElementById('email').textContent = data.email;
