@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function (){
         };
 
         // registerData 객체를 출력하여 userPassword와 confirmUserPassword 필드가 제대로 들어가는지 확인하니 위한 로그
-        console.log("Register Data:", registerData);
+        // console.log("Register Data:", registerData); // 디버그 용 콘솔 로그
 
         // Fetch API를 사용하여 서버로 POST 요청을 보냄
         fetch('http://localhost:8081/api/register', {
@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', function (){
         })
             .then(response => {
                 if (response.ok) {
-                    console.log("Response Status:", response.status);
-                    console.log("Response OK:", response.ok);
+                    // console.log("Response Status:", response.status); // 디버그 용 콘솔 로그
+                    // console.log("Response OK:", response.ok); // 디버그 용 콘솔 로그
 
                     alert("회원가입에 성공하였습니다!");
                     return;
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function (){
                 }
             })
             .then(data => {
-                console.log("Response Data:", data);
+                // console.log("Response Data:", data); // 디버그 용 콘솔 로그
                 window.location.href = "/v1/main.html";
             })
             .catch(error => {
