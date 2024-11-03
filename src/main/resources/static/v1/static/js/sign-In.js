@@ -15,9 +15,8 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
     })
         .then(response => {
             if (response.ok) {
-                console.log("Response Status:", response.status);
-                console.log("Response OK:", response.ok);
-
+                // console.log("Response Status:", response.status); // 디버그 용 콘솔 로그
+                // console.log("Response OK:", response.ok); // 디버그 용 콘솔 로그
                 alert("로그인에 성공하였습니다!");
                 return response.json();
             } else {
@@ -26,7 +25,7 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
             }
         })
         .then(data => {
-            console.log("Response Data:", data);
+            // console.log("Response Data:", data); // 디버그 용 콘솔 로그
             localStorage.setItem('jwtToken', data.token);
             window.location.href = "/v1/static/html/user-info.html";
         })
