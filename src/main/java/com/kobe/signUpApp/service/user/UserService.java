@@ -4,7 +4,6 @@ import com.kobe.signUpApp.domain.user.User;
 import com.kobe.signUpApp.dto.user.request.UserCreateRequest;
 import com.kobe.signUpApp.dto.user.response.UserResponse;
 import com.kobe.signUpApp.repository.user.UserJdbcRepository;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +13,13 @@ import java.util.Optional;
 public class UserService {
 
     private final UserJdbcRepository userJdbcRepository;
-    private final JdbcTemplate jdbcTemplate;
     private final PasswordEncoder passwordEncoder;
 
     public UserService(
             UserJdbcRepository userJdbcRepository,
-            JdbcTemplate jdbcTemplate,
             PasswordEncoder passwordEncoder
     ) {
         this.userJdbcRepository = userJdbcRepository;
-        this.jdbcTemplate = jdbcTemplate;
         this.passwordEncoder = passwordEncoder;
     }
 
