@@ -8,14 +8,14 @@ public class AdminResponse {
     private String name;
     private String email;
     private String adminNumber;
-    private Boolean confirmPassword;
+    private String confirmPassword;
 
     public AdminResponse(
             long id,
             String name,
             String email,
             String adminNumber,
-            Boolean confirmPassword
+            String confirmPassword
     ) {
         this.id = id;
         this.name = name;
@@ -40,7 +40,7 @@ public class AdminResponse {
         return adminNumber;
     }
 
-    public Boolean getConfirmPassword() {
+    public String getConfirmPassword() {
         return confirmPassword;
     }
 }
