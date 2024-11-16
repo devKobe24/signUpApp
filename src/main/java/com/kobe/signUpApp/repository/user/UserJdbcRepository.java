@@ -30,13 +30,12 @@ public class UserJdbcRepository {
 
     // 전체 유저 정보 조회
     public List<UserResponse> getUsers() {
-        String sql = "SELECT id, user_name, user_email, password_match FROM user";
+        String sql = "SELECT id, user_name, user_email FROM user";
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
             long id = rs.getLong("id");
             String userName = rs.getString("user_name");
             String userEmail = rs.getString("user_email");
-            String confirmUserPassword = rs.getString("password_match");
-            return new UserResponse(id, userName, userEmail, confirmUserPassword);
+            return new UserResponse(id, userName, userEmail);
         });
     }
 
@@ -48,8 +47,7 @@ public class UserJdbcRepository {
                 long id = rs.getLong("id");
                 String userName = rs.getString("user_name");
                 String userEmail = rs.getString("user_email");
-                String confirmUserPassword = rs.getString("password_match");
-                return new UserResponse(id, userName, userEmail, confirmUserPassword);
+                return new UserResponse(id, userName, userEmail);
             }));
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty(); // 결과가 없을 때 Optional.empty() 반환.
@@ -58,15 +56,14 @@ public class UserJdbcRepository {
 
     // 이메일로 특정 유저 정보 조회(비밀번호 포함)
     public Optional<User> getUserWithPasswordByEmail(String email) {
-        String sql = "SELECT id, user_name, user_email, user_password FROM user WHERE user_email = ?";
+        String sql = "SELECT user_name, user_email, user_password FROM user WHERE user_email = ?";
 
         try {
             return Optional.ofNullable(jdbcTemplate.queryForObject(sql, new Object[]{email}, (rs, rowNum) -> {
-                long id = rs.getLong("id");
                 String userName = rs.getString("user_name");
                 String userEmail = rs.getString("user_email");
                 String userPassword = rs.getString("user_password");
-                return new User(id, userName, userEmail, userPassword);
+                return new User(userName, userEmail, userPassword);
             }));
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
