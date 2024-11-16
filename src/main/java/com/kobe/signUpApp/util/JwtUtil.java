@@ -6,7 +6,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -17,7 +16,7 @@ public class JwtUtil {
     // 로깅을 위한 Logger 객체 생성.
     private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
 
-    private static final String SECRET_KEY = "Xi+bKuqLDG1tTXS8wyQ7IkFMSrpt+J9EAsM7bIBAQTGYPBj8xhaPKWhh0QBLfSjrGfYH1q+7FoXsKUXv4iHO5A==";
+    private static final String SECRET_KEY = "sUL8l4EpgcyFOOi2h+8D49oEWaK4rvIRrpFiCtKdgpoHudZASvVftmJ6x9XHIN8FzPOzQj/4iCzzBh2ONIv0Ww==";
     private static final long EXPIRATION_TIME = 86400000; // 1일
 
     private static SecretKey getSigningKey() {
