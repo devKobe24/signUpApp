@@ -5,44 +5,31 @@ import lombok.Data;
 
 @Data
 public class UserResponse {
-    private long id;
-    private String name;
-    private String email;
-    private String confirmPassword;
+    private long userId;
+    private String userName;
+    private String userEmail;
 
-    public UserResponse(
-            long id,
-            String name,
-            String email,
-            String confirmPassword
-    ) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.confirmPassword = confirmPassword;
+    public UserResponse(long userId, String userName, String userEmail) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userEmail = userEmail;
     }
 
-    public UserResponse(long id, User user) {
-        this.id = id;
-        this.name = user.getUserName();
-        this.email = user.getUserEmail();
-        this.confirmPassword = user.getConfirmUserPassword();
+    public UserResponse(long userId, User user) {
+        this.userId = userId;
+        this.userName = user.getUserName();
+        this.userEmail = user.getUserEmail();
     }
 
-    public long getId() {
-        return id;
+    public long getUserId() {
+        return userId;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-
-    public String getConfirmPassword() {
-        return confirmPassword;
+    public String getUserEmail() {
+        return userEmail;
     }
 }
