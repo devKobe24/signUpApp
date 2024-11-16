@@ -1,15 +1,22 @@
 package com.kobe.signUpApp.dto.user.request;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserCreateRequest {
+    @JsonProperty("user_name")
     private String userName;
-    private String userEmail;
-    private String userPassword;
-    private String confirmUserPassword;
 
-    @JsonIgnore
-    private Boolean isSamePassword;
+    @JsonProperty("user_email")
+    private String userEmail;
+
+    @JsonProperty("user_password")
+    private String userPassword;
+
+    public UserCreateRequest(String userName, String userEmail, String userPassword) {
+        this.userName = userName;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+    }
 
     public String getUserName() {
         return userName;
@@ -21,18 +28,5 @@ public class UserCreateRequest {
 
     public String getUserPassword() {
         return userPassword;
-    }
-
-    public String getConfirmUserPassword() {
-        return confirmUserPassword;
-    }
-
-    // 패스워드 확인 로직
-    public Boolean getSamePassword() {
-        if (this.userPassword.equals(this.confirmUserPassword)) {
-            return this.isSamePassword = true;
-        } else {
-            return this.isSamePassword = false;
-        }
     }
 }
