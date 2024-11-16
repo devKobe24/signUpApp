@@ -1,5 +1,6 @@
 package com.kobe.signUpApp.domain.user;
 
+import com.kobe.signUpApp.domain.user.saveHistory.UserSaveHistory;
 import jakarta.persistence.*;
 
 @Entity
@@ -18,57 +19,28 @@ public class User {
 
     @Column(name = "user_password", nullable = false)
     private String userPassword;
-    private String confirmUserPassword;
 
-    @Column(name = "password_match")
-    private boolean isSamePassword;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private UserSaveHistory userSaveHistory;
+
 
     protected User() {}
 
     public User(
-            Long id,
             String userName,
             String userEmail,
             String userPassword
-            ) {
-        if (userName == null || userName.isBlank()) {
-            throw new IllegalArgumentException(String.format("잘못된 userName(%s)이 들어왔습니다.", userName));
-        } else if (userEmail == null || userEmail.isBlank()) {
-            throw new IllegalArgumentException(String.format("잘못된 userEmail(%s)이 들어왔습니다.", userEmail));
-        } else if (userPassword == null || userPassword.isBlank()) {
-            throw new IllegalArgumentException(String.format("잘못된 userPassword(%s)이 들어왔습니다.", userPassword));
-        }
-
-        this.id = id;
-        this.userName = userName;
-        this.userEmail = userEmail;
-        this.userPassword = userPassword;
-    }
-
-    public User(
-            Long id,
-            String userName,
-            String userEmail,
-            String userPassword,
-            String confirmUserPassword,
-            boolean isSamePassword
     ) {
         if (userName == null || userName.isBlank()) {
             throw new IllegalArgumentException(String.format("잘못된 userName(%s)이 들어왔습니다.", userName));
         } else if (userEmail == null || userEmail.isBlank()) {
             throw new IllegalArgumentException(String.format("잘못된 userEmail(%s)이 들어왔습니다.", userEmail));
         } else if (userPassword == null || userPassword.isBlank()) {
-            throw new IllegalArgumentException(String.format("잘못된 userPassword(%s)이 들어왔습니다.", userPassword));
-        } else if (confirmUserPassword == null || confirmUserPassword.isBlank()) {
-            throw new IllegalArgumentException(String.format("잘못된 confirmUserPassword(%s)이 들어왔습니다.", confirmUserPassword));
+            throw new IllegalArgumentException();
         }
-
-        this.id = id;
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
-        this.confirmUserPassword = confirmUserPassword;
-        this.isSamePassword = isSamePassword;
     }
 
     public Long getId() {
@@ -87,11 +59,12 @@ public class User {
         return userPassword;
     }
 
-    public String getConfirmUserPassword() {
-        return confirmUserPassword;
+    public UserSaveHistory getUserSaveHistory() {
+        return userSaveHistory;
     }
 
-    public boolean isSamePassword() {
-        return isSamePassword;
+    public void setUserSaveHistory(UserSaveHistory userSaveHistory) {
+        this.userSaveHistory = userSaveHistory;
+        userSaveHistory.setUser(this); // 양방향 관계 설정
     }
 }
