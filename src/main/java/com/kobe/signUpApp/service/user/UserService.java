@@ -90,17 +90,13 @@ public class UserService {
 
     // 유저 인증 로직
     public UserResponse authenticateUser(String email, String rawPassword) {
-        Optional<User> userOptional = userRepository.getUserWithPasswordByUserEmail(email);
+        Optional<User> userOptional = userRepository.getUserByUserEmailAndUserPassword(email, rawPassword);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             if (passwordEncoder.matches(rawPassword, user.getUserPassword())) {
                 // 비밀번호가 일치하면 UserResponse로 필요한 정보만 변환.
                 return new UserResponse(user.getId(), user.getUserName(), user.getUserEmail());
-            } else {
-                System.out.println("비밀번호 불일치");
             }
-        } else {
-            System.out.println("이메일 불일치: " + email);
         }
         return null; // 인증 실패 시 null 반환
     }
@@ -119,7 +115,6 @@ public class UserService {
         if (user != null) {
             String token = JwtUtil.generateToken(request.getUserEmail()); // jwtUtil 인스턴스로 메서드 호출
             Map<String, String> response = new HashMap<>();
-            System.out.println("=================> token:" + token);
             response.put("token", token);
             response.put("message", "Login successful");
             return ResponseEntity.ok(response); // JSON 형태로 토큰과 메시지 반환
