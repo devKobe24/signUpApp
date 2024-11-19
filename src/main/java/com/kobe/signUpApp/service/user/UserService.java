@@ -90,7 +90,7 @@ public class UserService {
 
     // 유저 인증 로직
     public UserResponse authenticateUser(String email, String rawPassword) {
-        Optional<User> userOptional = userRepository.getUserByUserEmailAndUserPassword(email, rawPassword);
+        Optional<User> userOptional = userRepository.getUserByUserEmail(email);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             if (passwordEncoder.matches(rawPassword, user.getUserPassword())) {
