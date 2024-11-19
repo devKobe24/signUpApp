@@ -1,6 +1,7 @@
 // user-info.js
 document.addEventListener('DOMContentLoaded', function () {
     const token = localStorage.getItem('jwtToken');
+    console.log("Retrieved Token :", token) // 디버그용 로그
     if (!token) {
         alert('로그인이 필요합니다.');
         window.location.href = "/v1/main.html";
@@ -25,8 +26,8 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             // console.log("Fetched user data: ", data); // 데이터 확인 // 디버그 용 콘솔 로그
             // 데이터가 성공적으로 로드되면 HTML에 삽입
-            document.getElementById('name').textContent = data.name;
-            document.getElementById('email').textContent = data.email;
+            document.getElementById('name').textContent = data.userName;
+            document.getElementById('email').textContent = data.userEmail;
         })
         .catch(error => {
             console.error('Error in Fetching user data:', error);
